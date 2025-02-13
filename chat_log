@@ -1,0 +1,633 @@
+mhood112: Using the Sepal_Data.csv and Pedal_Data.csv, Combine the datasets to create a single DataFrame that contains the sample id, species, petal length, petal width, sepal length, and sepal width for each sample.
+
+Workspace: Collecting workspace informationTo combine the datasets from Sepal_Data.csv and Petal_Data.csv into a single DataFrame, you can use the following code in your assignment_panda.py file:
+
+```python
+import pandas as pd
+
+# Load the datasets
+sepal_data = pd.read_csv('Sepal_Data.csv')
+petal_data = pd.read_csv('Petal_Data.csv')
+
+# Merge the datasets on 'sample_id' and 'species'
+combined_data = pd.merge(sepal_data, petal_data, on=['sample_id', 'species'])
+
+# Select the relevant columns
+combined_data = combined_data[['sample_id', 'species', 'petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
+
+# Display the combined DataFrame
+print(combined_data)
+```
+
+This code will read the CSV files, merge them on the `sample_id` and `species` columns, and then select the relevant columns to create the combined DataFrame.
+
+mhood112: Calculate the correlation between each variable for all species in thd data set (there should be a total of 6 different comparisons).
+
+GitHub Copilot: To calculate the correlation between each variable for all species in the dataset, you can use the `corr()` method from pandas. Here is the updated code in your assignment_panda.py file:
+
+```python
+import numpy as np
+import pandas as pd
+
+# Load the datasets
+sepal_data = pd.read_csv('Sepal_Data.csv')
+petal_data = pd.read_csv('Petal_Data.csv')
+
+# Merge the datasets on 'sample_id' and 'species'
+combined_data = pd.merge(sepal_data, petal_data, on=['sample_id', 'species'])
+
+# Select the relevant columns
+combined_data = combined_data[['sample_id', 'species', 'petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
+
+# Calculate the correlation matrix
+correlation_matrix = combined_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+
+# Display the correlation matrix
+print(correlation_matrix)
+```
+
+This code will calculate and display the correlation matrix for the variables `petal_length`, `petal_width`, `sepal_length`, and `sepal_width`. The correlation matrix will show the correlation between each pair of variables.
+
+mhood112: there should be six different comparisons
+
+GitHub Copilot: To calculate the correlation between each variable for all species in the dataset, you need to calculate the correlation for each species separately. Here is the updated code in your assignment_panda.py file:
+
+```python
+import numpy as np
+import pandas as pd
+
+# Load the datasets
+sepal_data = pd.read_csv('Sepal_Data.csv')
+petal_data = pd.read_csv('Petal_Data.csv')
+
+# Merge the datasets on 'sample_id' and 'species'
+combined_data = pd.merge(sepal_data, petal_data, on=['sample_id', 'species'])
+
+# Select the relevant columns
+combined_data = combined_data[['sample_id', 'species', 'petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
+
+# Display the combined DataFrame
+print(combined_data)
+
+# Calculate the correlation matrix for each species
+species_list = combined_data['species'].unique()
+for species in species_list:
+    species_data = combined_data[combined_data['species'] == species]
+    correlation_matrix = species_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+    print(f"Correlation matrix for {species}:")
+    print(correlation_matrix)
+    print()
+```
+
+This code will calculate and display the correlation matrix for each species separately, resulting in six different comparisons.
+
+mhood112: Calculate the correlation between each variable for all species in thd data set (there should be a total of 6 different comparisons).
+
+GitHub Copilot: To calculate the correlation between each variable for all species in the dataset, you need to calculate the correlation for each pair of variables. Here is the updated code in your assignment_panda.py file:
+
+```python
+import numpy as np
+import pandas as pd
+
+# Load the datasets
+sepal_data = pd.read_csv('Sepal_Data.csv')
+petal_data = pd.read_csv('Petal_Data.csv')
+
+# Merge the datasets on 'sample_id' and 'species'
+combined_data = pd.merge(sepal_data, petal_data, on=['sample_id', 'species'])
+
+# Select the relevant columns
+combined_data = combined_data[['sample_id', 'species', 'petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
+
+# Display the combined DataFrame
+print(combined_data)
+
+# Calculate the correlation matrix for each species
+species_list = combined_data['species'].unique()
+for species in species_list:
+    species_data = combined_data[combined_data['species'] == species]
+    correlation_matrix = species_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+    print(f"Correlation matrix for {species}:")
+    print(correlation_matrix)
+    print()
+
+# Calculate the overall correlation matrix
+overall_correlation_matrix = combined_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+print("Overall correlation matrix:")
+print(overall_correlation_matrix)
+```
+
+This code will calculate and display the correlation matrix for each species separately, as well as the overall correlation matrix for all species combined. This will result in a total of six different comparisons.
+
+mhood112: Calculate the average of each variable for all species in the data set.
+
+
+GitHub Copilot: To calculate the average of each variable for all species in the dataset, you can use the `groupby` method along with the `mean` function. Here is the updated code in your assignment_panda.py file:
+
+```python
+import numpy as np
+import pandas as pd
+
+# Load the datasets
+sepal_data = pd.read_csv('Sepal_Data.csv')
+petal_data = pd.read_csv('Petal_Data.csv')
+
+# Merge the datasets on 'sample_id' and 'species'
+combined_data = pd.merge(sepal_data, petal_data, on=['sample_id', 'species'])
+
+# Select the relevant columns
+combined_data = combined_data[['sample_id', 'species', 'petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
+
+# Display the combined DataFrame
+print(combined_data)
+
+# Calculate the correlation matrix for each species
+species_list = combined_data['species'].unique()
+for species in species_list:
+    species_data = combined_data[combined_data['species'] == species]
+    correlation_matrix = species_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+    print(f"Correlation matrix for {species}:")
+    print(correlation_matrix)
+    print()
+
+# Calculate the overall correlation matrix
+overall_correlation_matrix = combined_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+print("Overall correlation matrix:")
+print(overall_correlation_matrix)
+
+# Calculate the average of each variable for all species
+average_values = combined_data.groupby('species').mean()
+print("Average values for each species:")
+print(average_values)
+```
+
+This code will calculate and display the average values of `petal_length`, `petal_width`, `sepal_length`, and `sepal_width` for each species in the dataset.
+
+mhood112: what does this mean, Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/groupby/groupby.py", line 1942, in _agg_py_fallback
+    res_values = self._grouper.agg_series(ser, alt, preserve_dtype=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/groupby/ops.py", line 864, in agg_series
+    result = self._aggregate_series_pure_python(obj, func)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/groupby/ops.py", line 885, in _aggregate_series_pure_python
+    res = func(group)
+          ^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/groupby/groupby.py", line 2454, in <lambda>
+    alt=lambda x: Series(x, copy=False).mean(numeric_only=numeric_only),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/series.py", line 6549, in mean
+    return NDFrame.mean(self, axis, skipna, numeric_only, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/generic.py", line 12420, in mean
+    return self._stat_function(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/generic.py", line 12377, in _stat_function
+    return self._reduce(
+           ^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/series.py", line 6457, in _reduce
+    return op(delegate, skipna=skipna, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/nanops.py", line 147, in f
+    result = alt(values, axis=axis, skipna=skipna, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/nanops.py", line 404, in new_func
+    result = func(values, axis=axis, skipna=skipna, mask=mask, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/nanops.py", line 720, in nanmean
+    the_sum = _ensure_numeric(the_sum)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/nanops.py", line 1701, in _ensure_numeric
+    raise TypeError(f"Could not convert string '{x}' to numeric")
+TypeError: Could not convert string 'k1$h*pkrpRerFKWF5F0rlPyu#7r6qZBxP0GyckoyhXKHKUPVhwT9qrxvjLe.ePT1KDkgrbju23uDg6LkF#AscyVtqZKK9EaMpQsrECdpLvfgAMrTcSf7HFRoSMZl9NeOMPKfX1tCtcfDpZzV.zUpU#otVBvvcynjp7UzNHBdZ73PxIebCJqbqccBEqaZanXdnZU0NqN8AaLZ8jelu^qCESJwZSkwHLWHhxckk*jnElcXwWrgq#pD2AT3PSCsbXqJ4EZGDuAsshYBtqVc98KtQDXFu6mpqARwpVhHYWHt9wfYExh9hqtDXoq7HfujucilB4DxLHmiIZiGHxuqbHuguAPn6KJyMLpvdNBdmLTRXcbgpAhaxcGF:TYIFRBMj@rIwYkuUsNcDYKGLi76YN7IL5NrKknveI5GUjChpNDDcwiseh3IIaOpfQqM6uUambhJHJVeqxTj7HsOytlDcHTr0HkqaFx80QtX6LRAdYzEePbHx.vUxNgFG8eGUaTcxHVlZdQIneAs6HWnKGr&g0FkDuaVhPRORmyJiI6DvoSRs0he5PXZ6N^x,fzIVpjKFXR9RopGauVrJYSgDPqIzi12gdO1.YMSQuwaWaPchGH!bbMXD61MItc2APURnphXM&tofspVkMitzkxJCK4SkgVMXQMFvRW6GC0FiyfOdGVCXAogTKYlouRfhQcCqkgElTdgQphLLoXMzigjOK01ZeRvOXuUJHOiLkhZcmFr4G9gwtUFpH' to numeric
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/miahood/Desktop/Python WS/assignment_panda.py", line 32, in <module>
+    average_values = combined_data.groupby('species').mean()
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/groupby/groupby.py", line 2452, in mean
+    result = self._cython_agg_general(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/groupby/groupby.py", line 1998, in _cython_agg_general
+    new_mgr = data.grouped_reduce(array_func)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 1469, in grouped_reduce
+    applied = sb.apply(func)
+              ^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 393, in apply
+    result = func(self.values, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/groupby/groupby.py", line 1995, in array_func
+    result = self._agg_py_fallback(how, values, ndim=data.ndim, alt=alt)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/pandas/core/groupby/groupby.py", line 1946, in _agg_py_fallback
+    raise type(err)(msg) from err
+TypeError: agg function failed [how->mean,dtype->object]
+
+GitHub Copilot: The error you're encountering is due to the presence of non-numeric data in the columns you're trying to calculate the mean for. Specifically, it seems that the `sample_id` column contains string values, which cannot be converted to numeric values for the mean calculation.
+
+To fix this, you should exclude the `sample_id` column when calculating the mean. Here's the updated code:
+
+```python
+import numpy as np
+import pandas as pd
+
+# Load the datasets
+sepal_data = pd.read_csv('Sepal_Data.csv')
+petal_data = pd.read_csv('Petal_Data.csv')
+
+# Merge the datasets on 'sample_id' and 'species'
+combined_data = pd.merge(sepal_data, petal_data, on=['sample_id', 'species'])
+
+# Select the relevant columns
+combined_data = combined_data[['sample_id', 'species', 'petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
+
+# Display the combined DataFrame
+print(combined_data)
+
+# Calculate the correlation matrix for each species
+species_list = combined_data['species'].unique()
+for species in species_list:
+    species_data = combined_data[combined_data['species'] == species]
+    correlation_matrix = species_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+    print(f"Correlation matrix for {species}:")
+    print(correlation_matrix)
+    print()
+
+# Calculate the overall correlation matrix
+overall_correlation_matrix = combined_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+print("Overall correlation matrix:")
+print(overall_correlation_matrix)
+
+# Calculate the average of each variable for all species
+average_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].mean()
+print("Average values for each species:")
+print(average_values)
+```
+
+This code excludes the `sample_id` column when calculating the mean, which should resolve the error.
+
+mhood112: Calculate the median of each variable for all species in the data set.
+
+
+GitHub Copilot: To calculate the median of each variable for all species in the dataset, you can use the `median` function from pandas. Here is the updated code in your assignment_panda.py file:
+
+```python
+import numpy as np
+import pandas as pd
+
+# Load the datasets
+sepal_data = pd.read_csv('Sepal_Data.csv')
+petal_data = pd.read_csv('Petal_Data.csv')
+
+# Merge the datasets on 'sample_id' and 'species'
+combined_data = pd.merge(sepal_data, petal_data, on=['sample_id', 'species'])
+
+# Select the relevant columns
+combined_data = combined_data[['sample_id', 'species', 'petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
+
+# Display the combined DataFrame
+print(combined_data)
+
+# Calculate the correlation matrix for each species
+species_list = combined_data['species'].unique()
+for species in species_list:
+    species_data = combined_data[combined_data['species'] == species]
+    correlation_matrix = species_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+    print(f"Correlation matrix for {species}:")
+    print(correlation_matrix)
+    print()
+
+# Calculate the overall correlation matrix
+overall_correlation_matrix = combined_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+print("Overall correlation matrix:")
+print(overall_correlation_matrix)
+
+# Calculate the average of each variable for all species
+average_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].mean()
+print("Average values for each species:")
+print(average_values)
+
+# Calculate the median of each variable for all species
+median_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].median()
+print("Median values for each species:")
+print(median_values)
+```
+
+This code will calculate and display the median values of `petal_length`, `petal_width`, `sepal_length`, and `sepal_width` for each species in the dataset.
+
+mhood112: Calculate the standard deviation of each variable for all species in the data set.
+
+GitHub Copilot: To calculate the standard deviation of each variable for all species in the dataset, you can use the `std` function from pandas. Here is the updated code in your assignment_panda.py file:
+
+```python
+import numpy as np
+import pandas as pd
+
+# Load the datasets
+sepal_data = pd.read_csv('Sepal_Data.csv')
+petal_data = pd.read_csv('Petal_Data.csv')
+
+# Merge the datasets on 'sample_id' and 'species'
+combined_data = pd.merge(sepal_data, petal_data, on=['sample_id', 'species'])
+
+# Select the relevant columns
+combined_data = combined_data[['sample_id', 'species', 'petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
+
+# Display the combined DataFrame
+print(combined_data)
+
+# Calculate the correlation matrix for each species
+species_list = combined_data['species'].unique()
+for species in species_list:
+    species_data = combined_data[combined_data['species'] == species]
+    correlation_matrix = species_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+    print(f"Correlation matrix for {species}:")
+    print(correlation_matrix)
+    print()
+
+# Calculate the overall correlation matrix
+overall_correlation_matrix = combined_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+print("Overall correlation matrix:")
+print(overall_correlation_matrix)
+
+# Calculate the average of each variable for all species
+average_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].mean()
+print("Average values for each species:")
+print(average_values)
+
+# Calculate the median of each variable for all species
+median_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].median()
+print("Median values for each species:")
+print(median_values)
+
+# Calculate the standard deviation of each variable for all species
+std_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].std()
+print("Standard deviation values for each species:")
+print(std_values)
+```
+
+This code will calculate and display the standard deviation values of `petal_length`, `petal_width`, `sepal_length`, and `sepal_width` for each species in the dataset.
+
+mhood112: Which species of irises are most similar/are least similar? Reference your measurements in part 1 to support your positions.
+
+
+
+GitHub Copilot: To determine which species of irises are most similar and least similar, we can compare the average, median, and standard deviation values of each variable (petal length, petal width, sepal length, and sepal width) for each species. Additionally, we can look at the correlation matrices to see how the variables are related within each species.
+
+Here is the updated code to calculate and display these statistics:
+
+```python
+import numpy as np
+import pandas as pd
+
+# Load the datasets
+sepal_data = pd.read_csv('Sepal_Data.csv')
+petal_data = pd.read_csv('Petal_Data.csv')
+
+# Merge the datasets on 'sample_id' and 'species'
+combined_data = pd.merge(sepal_data, petal_data, on=['sample_id', 'species'])
+
+# Select the relevant columns
+combined_data = combined_data[['sample_id', 'species', 'petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
+
+# Display the combined DataFrame
+print(combined_data)
+
+# Calculate the correlation matrix for each species
+species_list = combined_data['species'].unique()
+for species in species_list:
+    species_data = combined_data[combined_data['species'] == species]
+    correlation_matrix = species_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+    print(f"Correlation matrix for {species}:")
+    print(correlation_matrix)
+    print()
+
+# Calculate the overall correlation matrix
+overall_correlation_matrix = combined_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+print("Overall correlation matrix:")
+print(overall_correlation_matrix)
+
+# Calculate the average of each variable for all species
+average_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].mean()
+print("Average values for each species:")
+print(average_values)
+
+# Calculate the median of each variable for all species
+median_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].median()
+print("Median values for each species:")
+print(median_values)
+
+# Calculate the standard deviation of each variable for all species
+std_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].std()
+print("Standard deviation values for each species:")
+print(std_values)
+```
+
+After running this code, you will have the average, median, and standard deviation values for each species, as well as the correlation matrices. You can use these statistics to compare the species:
+
+1. **Average Values**: Compare the average values of each variable for each species. Species with similar average values are more similar.
+2. **Median Values**: Compare the median values of each variable for each species. Species with similar median values are more similar.
+3. **Standard Deviation Values**: Compare the standard deviation values of each variable for each species. Species with similar standard deviation values are more similar.
+4. **Correlation Matrices**: Compare the correlation matrices for each species. Species with similar correlation patterns are more similar.
+
+Based on these comparisons, you can determine which species are most similar and which are least similar.
+
+mhood112: There should be 300 sample IDs in the dataframe once they combine
+
+GitHub Copilot: To ensure that the combined DataFrame contains 300 sample IDs, you should verify that both the Sepal_Data.csv and Petal_Data.csv files contain 300 unique sample IDs each. After merging the datasets, you can check the length of the combined DataFrame to confirm that it contains 300 rows.
+
+Here is the updated code to include this verification:
+
+```python
+import numpy as np
+import pandas as pd
+
+# Load the datasets
+sepal_data = pd.read_csv('Sepal_Data.csv')
+petal_data = pd.read_csv('Petal_Data.csv')
+
+# Verify the number of unique sample IDs in each dataset
+print(f"Number of unique sample IDs in Sepal_Data.csv: {sepal_data['sample_id'].nunique()}")
+print(f"Number of unique sample IDs in Petal_Data.csv: {petal_data['sample_id'].nunique()}")
+
+# Merge the datasets on 'sample_id' and 'species'
+combined_data = pd.merge(sepal_data, petal_data, on=['sample_id', 'species'])
+
+# Verify the number of rows in the combined DataFrame
+print(f"Number of rows in the combined DataFrame: {len(combined_data)}")
+
+# Select the relevant columns
+combined_data = combined_data[['sample_id', 'species', 'petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
+
+# Display the combined DataFrame
+print(combined_data)
+
+# Calculate the correlation matrix for each species
+species_list = combined_data['species'].unique()
+for species in species_list:
+    species_data = combined_data[combined_data['species'] == species]
+    correlation_matrix = species_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+    print(f"Correlation matrix for {species}:")
+    print(correlation_matrix)
+    print()
+
+# Calculate the overall correlation matrix
+overall_correlation_matrix = combined_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+print("Overall correlation matrix:")
+print(overall_correlation_matrix)
+
+# Calculate the average of each variable for all species
+average_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].mean()
+print("\nAverage values for each species:")
+print(average_values)
+
+# Calculate the median of each variable for all species
+median_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].median()
+print("\nMedian values for each species:")
+print(median_values)
+
+# Calculate the standard deviation of each variable for all species
+std_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].std()
+print("\nStandard deviation values for each species:")
+print(std_values)
+```
+
+This code will print the number of unique sample IDs in each dataset before merging and the number of rows in the combined DataFrame after merging. This will help you verify that the combined DataFrame contains 300 sample IDs.
+
+mhood112: why is there only 150 in the dataframe when there are 150 in each csv file
+
+GitHub Copilot: The issue might be due to the way the datasets are being merged. If there are any discrepancies in the `sample_id` or `species` columns between the two CSV files, the merge operation will only include rows that have matching values in both datasets. This is known as an inner join.
+
+To ensure that all rows from both datasets are included, you can use an outer join instead of an inner join. Here is the updated code to perform an outer join:
+
+```python
+import numpy as np
+import pandas as pd
+
+# Load the datasets
+sepal_data = pd.read_csv('Sepal_Data.csv')
+petal_data = pd.read_csv('Petal_Data.csv')
+
+# Verify the number of unique sample IDs in each dataset
+print(f"Number of unique sample IDs in Sepal_Data.csv: {sepal_data['sample_id'].nunique()}")
+print(f"Number of unique sample IDs in Petal_Data.csv: {petal_data['sample_id'].nunique()}")
+
+# Merge the datasets on 'sample_id' and 'species' using an outer join
+combined_data = pd.merge(sepal_data, petal_data, on=['sample_id', 'species'], how='outer')
+
+# Verify the number of rows in the combined DataFrame
+print(f"Number of rows in the combined DataFrame: {len(combined_data)}")
+
+# Select the relevant columns
+combined_data = combined_data[['sample_id', 'species', 'petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
+
+# Display the combined DataFrame
+print(combined_data)
+
+# Calculate the correlation matrix for each species
+species_list = combined_data['species'].unique()
+for species in species_list:
+    species_data = combined_data[combined_data['species'] == species]
+    correlation_matrix = species_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+    print(f"Correlation matrix for {species}:")
+    print(correlation_matrix)
+    print()
+
+# Calculate the overall correlation matrix
+overall_correlation_matrix = combined_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+print("Overall correlation matrix:")
+print(overall_correlation_matrix)
+
+# Calculate the average of each variable for all species
+average_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].mean()
+print("\nAverage values for each species:")
+print(average_values)
+
+# Calculate the median of each variable for all species
+median_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].median()
+print("\nMedian values for each species:")
+print(median_values)
+
+# Calculate the standard deviation of each variable for all species
+std_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].std()
+print("\nStandard deviation values for each species:")
+print(std_values)
+```
+
+By using `how='outer'` in the `pd.merge` function, you ensure that all rows from both datasets are included in the combined DataFrame, even if there are discrepancies in the `sample_id` or `species` columns. This should result in a combined DataFrame with 300 rows.
+
+mhood112: Combine the datasets to create a single DataFrame that contains the sample id, species, petal length, petal width, sepal length, and sepal width for each sample.
+
+GitHub Copilot: To combine the datasets from Sepal_Data.csv and Petal_Data.csv into a single DataFrame that contains the sample id, species, petal length, petal width, sepal length, and sepal width for each sample, you can use the following code:
+
+```python
+import numpy as np
+import pandas as pd
+
+# Load the datasets
+sepal_data = pd.read_csv('Sepal_Data.csv')
+petal_data = pd.read_csv('Petal_Data.csv')
+
+# Verify the number of unique sample IDs in each dataset
+print(f"Number of unique sample IDs in Sepal_Data.csv: {sepal_data['sample_id'].nunique()}")
+print(f"Number of unique sample IDs in Petal_Data.csv: {petal_data['sample_id'].nunique()}")
+
+# Merge the datasets on 'sample_id' and 'species' using an outer join
+combined_data = pd.merge(sepal_data, petal_data, on=['sample_id', 'species'], how='outer')
+
+# Verify the number of rows in the combined DataFrame
+print(f"Number of rows in the combined DataFrame: {len(combined_data)}")
+
+# Select the relevant columns
+combined_data = combined_data[['sample_id', 'species', 'petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
+
+# Display the combined DataFrame
+print(combined_data)
+```
+
+This code will read the CSV files, merge them on the `sample_id` and `species` columns using an outer join to ensure all rows are included, and then select the relevant columns to create the combined DataFrame. The combined DataFrame will contain the sample id, species, petal length, petal width, sepal length, and sepal width for each sample.
+
+mhood112: why is this the output, Number of unique sample IDs in Sepal_Data.csv: 150
+Number of unique sample IDs in Petal_Data.csv: 150
+Number of rows in the combined DataFrame: 150
+
+GitHub Copilot: The issue is likely due to the merge operation. If the `sample_id` and `species` columns do not match exactly between the two datasets, the merge will only include rows that have matching values in both datasets. This is known as an inner join.
+
+To ensure that all rows from both datasets are included, you should use an outer join. However, if there are discrepancies in the `sample_id` or `species` columns, you may need to investigate and clean the data to ensure that the values match.
+
+Here is the updated code to perform an outer join and check for discrepancies:
+
+```python
+import numpy as np
+import pandas as pd
+
+# Load the datasets
+sepal_data = pd.read_csv('Sepal_Data.csv')
+petal_data = pd.read_csv('Petal_Data.csv')
+
+# Verify the number of unique sample IDs in each dataset
+print(f"Number of unique sample IDs in Sepal_Data.csv: {sepal_data['sample_id'].nunique()}")
+print(f"Number of unique sample IDs in Petal_Data.csv: {petal_data['sample_id'].nunique()}")
+
+# Merge the datasets on 'sample_id' and 'species' using an outer join
+combined_data = pd.merge(sepal_data, petal_data, on=['sample_id', 'species'], how='outer')
+
+# Verify the number of rows in the combined DataFrame
+print(f"Number of rows in the combined DataFrame: {len(combined_data)}")
+
+# Check for missing values in the combined DataFrame
+missing_values = combined_data.isnull().sum()
+print("Missing values in the combined DataFrame:")
+print(missing_values)
+
+# Select the relevant columns
+combined_data = combined_data[['sample_id', 'species', 'petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
+
+# Display the combined DataFrame
+print(combined_data)
+```
+
+This code will perform an outer join to ensure that all rows from both datasets are included. It will also check for missing values in the combined DataFrame, which can help identify any discrepancies in the `sample_id` or `species` columns. If there are missing values, you may need to clean the data to ensure that the values match between the two datasets.
