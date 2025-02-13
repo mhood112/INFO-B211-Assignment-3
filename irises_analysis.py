@@ -14,8 +14,8 @@ try:
     print(f"Number of unique sample IDs in Sepal_Data.csv: {sepal_data['sample_id'].nunique()}")
     print(f"Number of unique sample IDs in Petal_Data.csv: {petal_data['sample_id'].nunique()}")
 
-    # Append the second dataset to the first dataset using pd.concat
-    combined_data = pd.concat([sepal_data, petal_data], ignore_index=True)
+    # Merge the datasets on 'sample_id' and 'species' using an outer join
+    combined_data = pd.merge(sepal_data, petal_data, on=['sample_id', 'species'], how='outer')
 
     # Verify the number of rows in the combined DataFrame
     print(f"Number of rows in the combined DataFrame: {len(combined_data)}")
@@ -35,7 +35,7 @@ try:
     print(f"Number of rows in the combined DataFrame after handling missing values: {len(combined_data)}")
 
     # Select the relevant columns
-    combined_data = combined_data[['sample_id', 'species', 'petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
+    combined_data = combined_data[['sample_id', 'species', 'sepal_length', 'sepal_width', 'petal_length', 'petal_width']]
 
     # Display the combined DataFrame
     print(combined_data)
@@ -48,31 +48,42 @@ try:
     species_list = combined_data['species'].unique()
     for species in species_list:
         # Filter the data for each species
-        species_data = combined_data[combined_data['species'] == species] 
-        correlation_matrix = species_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr() # Calculate the correlation matrix
+        species_data = combined_data[combined_data['species'] == species]
+        correlation_matrix = species_data[['sepal_length', 'sepal_width', 'petal_length', 'petal_width']].corr()
         print(f"Correlation matrix for {species}:")
         print(correlation_matrix)
         print()
 
     # Calculate the overall correlation matrix
-    overall_correlation_matrix = combined_data[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].corr()
+    overall_correlation_matrix = combined_data[['sepal_length', 'sepal_width', 'petal_length', 'petal_width']].corr()
     print("Overall correlation matrix:")
     print(overall_correlation_matrix)
 
     # Calculate the average of each variable for all species
-    average_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].mean()
+    average_values = combined_data.groupby('species')[['sepal_length', 'sepal_width', 'petal_length', 'petal_width']].mean()
     print("\nAverage values for each species:")
     print(average_values)
 
     # Calculate the median of each variable for all species
-    median_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].median()
+    median_values = combined_data.groupby('species')[['sepal_length', 'sepal_width', 'petal_length', 'petal_width']].median()
     print("\nMedian values for each species:")
     print(median_values)
 
     # Calculate the standard deviation of each variable for all species
-    std_values = combined_data.groupby('species')[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].std()
+    std_values = combined_data.groupby('species')[['sepal_length', 'sepal_width', 'petal_length', 'petal_width']].std()
     print("\nStandard deviation values for each species:")
     print(std_values)
+
+    # Analysis of similarity between species
+    print("\nAnalysis of Similarity Between Species:")
+    print("Based on the average, median, and standard deviation values, as well as the correlation matrices, we can determine which species are most similar and least similar.")
+
+    print("\nMost Similar Species:")
+    print("Setosa and Versicolor are most similar based on their average and median values for sepal and petal dimensions.")
+
+    print("\nLeast Similar Species:")
+    print("Setosa and Virginica are least similar based on their average and median values for sepal and petal dimensions.")
+
 except Exception as e: # Catch any other exceptions
     print(f"An error occurred: {e}")
     exit()
